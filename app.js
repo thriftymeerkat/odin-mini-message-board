@@ -9,6 +9,11 @@ app.use(express.static(assetsPath));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+const links = [
+  { href: "/", text: "Home" },
+  { href: "/new", text: "New" },
+];
+
 const messages = [
   {
     text: "Hi there!",
@@ -23,13 +28,12 @@ const messages = [
 ];
 
 app.get("/", (req, res) => {
-    res.render("index", { title: "Mini Messageboard", messages: messages })
+    res.render("index", { title: "Mini Messageboard", links: links, messages: messages })
 });
 
 app.get("/new", (req, res) => {
-  res.render("about")
+  res.render("new", { title: "New Post", links: links })
 });
-
 
 // Error-handling middleware goes last
 app.use((err, req, res, next) => {
